@@ -1,0 +1,29 @@
+https://moonlit-baklava-aeaf64.netlify.app/
+tree /F
+mvn clean test -U- recheck the dependencies
+mvn test
+
+
+
+
+
+
+
+
+
+
+git add .
+git commit -m "Initial Commit"
+git remote remove origin
+git remote add origin https://github.com/sivaprasadrc/ATLAS.git
+git push -u origin main
+
+
+
+
+
+
+
+
+
+
