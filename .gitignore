@@ -39,5 +39,5 @@ build/
 .DS_Store
 
 target
-src/test/resources/payloads
-src/test/resources/karate-config.js
+/src/test/resources/payloads
+/src/test/resources/karate-config.js
