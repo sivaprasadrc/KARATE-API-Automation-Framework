@@ -6,16 +6,22 @@ Feature: Home Loan
     * def applicationCreation = callonce read('classpath:feature/01Initialization.feature')
     * def PayloadEncryptor = Java.type('utils.PayloadEncryptor')
     * def PayloadDecryptor = Java.type('utils.PayloadDecryptor')
+    * def scenarioName = karate.info.scenarioName
 
   #Requisites
-    * def accessToken = auth.accessToken
     * def applicationID = applicationCreation.applicationID
-    * headers commonHeaders
+    * def isDocumentAttach = scenarioName == 'Document Attach'
+    * def pathLink = isDocumentAttach ? documentPathA+applicationID+documentPathB:flowPath
+    * def paramLink = isDocumentAttach ? {} : flowParams
+    * def accessToken = auth.accessToken
+    Given url baseUrl
+    And path pathLink
+    And params paramLink
+    * def requestHeaders = isDocumentAttach ? documentHeaders : commonHeaders
+    * headers requestHeaders
     * header access_token = accessToken
 
-    Given url baseUrl
-    And path flowPath
-    And params flowParams
+
 
   Scenario: Loan Details
     * def requestBody = read('classpath:payloads/createApplication/06LoanDetails.json')
@@ -138,7 +144,13 @@ Feature: Home Loan
     When method POST
     Then status 200
 
-  Scenario: Docu Details
+#  Scenario: Document Attach
+#    And multipart file file0 = {read:'classpath:Test File Format/Test.pdf',filename:'Test.pdf',contentType:'application/pdf'}
+#    When method POST
+#    Then status 200
+
+
+  Scenario: Document Details
     * def requestBody = read('classpath:payloads/createApplication/22Docu.json')
     * def jsonString = karate.pretty(requestBody)
     * def encryptedPayload = PayloadEncryptor.encryptor(jsonString,secretKey)
