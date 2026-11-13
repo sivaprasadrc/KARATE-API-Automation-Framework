@@ -40,7 +40,6 @@ build/
 
 target
 /src/test/resources/payloads
-/src/test/resources/karate-config.js
 /pom.xml
 /src/test/resources/apiConfig
 /commander.txt
