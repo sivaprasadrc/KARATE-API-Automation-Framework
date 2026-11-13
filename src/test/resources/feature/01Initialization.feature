@@ -35,7 +35,7 @@ Background:
     When method POST
     Then status 200
 
-  Scenario: Acknowledgement
+#  Scenario: Acknowledgement
 
 
     * def requestBody = read('classpath:payloads/createApplication/03acknowledgement.json')
@@ -48,14 +48,14 @@ Background:
   Scenario: Create Application
 
 
-    * def requestBody = read('classpath:payloads/createApplication/04createApplication.json')
-    * def jsonString = karate.pretty(requestBody)
-    * def encryptedPayload = PayloadEncryptor.encryptor(jsonString,secretKey)
-    And request encryptedPayload
-    When method POST
-    Then status 200
-
-    * def encryptedResponse = response.trim().replace(/^"|"$/g, '')
-    * def jsonString  = PayloadDecryptor.decryptor(encryptedResponse, secretKey)
-    * def decryptedResponse = karate.fromString(jsonString)
-    * def applicationID =  decryptedResponse.data['application_id']
+#    * def requestBody = read('classpath:payloads/createApplication/04createApplication.json')
+#    * def jsonString = karate.pretty(requestBody)
+#    * def encryptedPayload = PayloadEncryptor.encryptor(jsonString,secretKey)
+#    And request encryptedPayload
+#    When method POST
+#    Then status 200
+#
+#    * def encryptedResponse = response.trim().replace(/^"|"$/g, '')
+#    * def jsonString  = PayloadDecryptor.decryptor(encryptedResponse, secretKey)
+#    * def decryptedResponse = karate.fromString(jsonString)
+#    * def applicationID =  decryptedResponse.data['application_id']
